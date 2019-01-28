@@ -1,27 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Hello = (props) => {
+const History = (props) => {
+  if (props.allClicks.length === 0) {
     return (
       <div>
-        <p>
-          Hello {props.name}, you are {props.age} years old
-        </p>
+        sovellusta käytetään nappeja painelemalla
       </div>
     )
   }
-  
-  const App = () => {
-    const nimi = 'Pekka'
-    const ika = 10
-  
-    return (
-      <div>
-        <h1>Greetings</h1>
-        <Hello name="Arto" age={26 + 10} />
-        <Hello name={nimi} age={ika} />
-      </div>
-    )
+
+  return (
+    <div>
+        näppäilyhistoria: {props.allClicks.join(' ')}
+    </div>
+  )
+}
+
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
+
+const App = (props) => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
   }
-  
-  ReactDOM.render(<App />, document.getElementById('root'))
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+  }
+
+  return (
+    <div>
+      <div>
+        {left}
+        <Button handleClick={handleLeftClick} text='vasen' />
+        <Button handleClick={handleRightClick} text='oikea' />
+        {right}
+        <History allClicks={allClicks} />
+      </div>
+    </div>
+  )
+}
+
+ReactDOM.render(
+  <App />, 
+  document.getElementById('root')
+)
