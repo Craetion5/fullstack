@@ -16,4 +16,5 @@ tehtäviä tehty:
 tehtäviä tehty: 
 
 1, 2, 3*, 4, 5 (kansiossa teht2.1)
+
 6, 7, 8, 9*, 11, 15, 16, 17, 19, 20* (kansiossa teht2.6)
